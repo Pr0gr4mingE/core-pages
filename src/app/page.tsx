@@ -1,31 +1,50 @@
-import React from 'react';
+"use client";
+
+import { FormEvent, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 
 export default function LandingPage() {
+  const router = useRouter();
+
+  const [nome, setNome] = useState('Vitor');
+  const [email, setEmail] = useState('vitor@email.com');
+  const [senha, setSenha] = useState('123');
+
+  const handleLogin = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); 
+    router.push('/dashboard');
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
       <div className="max-w-md w-full bg-gray-800 p-8 rounded-lg shadow-xl">
         <h1 className="text-3xl font-bold mb-2 text-center text-blue-400">CorePages</h1>
         <p className="text-gray-400 text-center mb-6">Crie sua estrutura padrão em minutos.</p>
         
-        <form className="flex flex-col gap-4">
-          <input 
+        <form onSubmit={handleLogin} className="flex flex-col gap-4">
+          <Input 
             type="text" 
             placeholder="Nome" 
-            className="p-3 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:border-blue-500"
+            value={nome} 
+            onChange={(e) => setNome(e.target.value)} 
           />
-          <input 
+          <Input 
             type="email" 
             placeholder="E-mail" 
-            className="p-3 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:border-blue-500"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
-          <input 
+          <Input 
             type="password" 
             placeholder="Senha" 
-            className="p-3 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:border-blue-500"
+            value={senha}
+            onChange={(e) => setSenha(e.target.value)}
           />
-          <button type="button" className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded mt-2 transition-colors">
+          <Button type="submit" variant="primary" size="md" className="mt-2">
             Cadastrar e Entrar
-          </button>
+          </Button>
         </form>
       </div>
     </div>
