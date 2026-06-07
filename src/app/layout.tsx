@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import "./globals.css"; // Garante que o Tailwind e os estilos base sejam carregados
+import "@/assets/styles/globals.css"; // Garante que o Tailwind e os estilos base sejam carregados
 
 export const metadata: Metadata = {
   title: "CorePages",

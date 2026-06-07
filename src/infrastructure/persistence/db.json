@@ -1,0 +1,35 @@
+{
+  "users": [
+    {
+      "id": "usr_001",
+      "name": "Vitor",
+      "email": "vitor@email.com",
+      "password": "123"
+    }
+  ],
+  "pages": [
+    {
+      "id": "page_1",
+      "userId": "usr_001",
+      "slug": "minha-loja",
+      "title": "Minha Loja de Roupas",
+      "headerConfig": {
+        "setColor": true,
+        "colorKey": "color06",
+        "setLogo": true,
+        "setTitle": true,
+        "setNavMenu": true
+      },
+      "sidebarConfig": {
+        "setColor": false,
+        "setLogo": true,
+        "setNavMenu": true
+      },
+      "footerConfig": {
+        "setColor": true,
+        "colorKey": "color06",
+        "setText": true
+      }
+    }
+  ]
+}
