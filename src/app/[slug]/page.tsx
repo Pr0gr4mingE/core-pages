@@ -1,27 +1,62 @@
-import React from 'react';
-import { mockedPages } from '@/infrastructure/persistence/my_pages/list_pages_mocks';
-import { AppShell } from '@/core/app-shell';
+"use client";
 
-export default function MyCustomPage() {
-  // Em um cenário real, você pegaria o ID ou Slug da URL e buscaria no banco de dados.
-  // Aqui estamos pegando a configuração da "página 2" (Blog de Tecnologia)
-  const myPageConfig = mockedPages[1];
+import { FormEvent, useState } from 'react'; // Adicionamos o useState aqui
+import { useRouter } from 'next/navigation';
+
+export default function LandingPage() {
+  const router = useRouter();
+
+  // 1. Aqui estão os hooks da tela de cadastro!
+  const [nome, setNome] = useState('Vitor');
+  const [email, setEmail] = useState('vitor@email.com');
+  const [senha, setSenha] = useState('123');
+
+  const handleLogin = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); 
+    
+    // 2. Agora você tem acesso ao que o usuário digitou!
+    console.log("Tentando logar com:", { nome, email, senha });
+    
+    // Redireciona para o painel
+    router.push('/dashboard');
+  };
 
   return (
-    <AppShell config={myPageConfig}>
-      <div className="max-w-3xl mx-auto">
-        <h1 className="text-4xl font-black mb-4">Bem-vindo ao {myPageConfig.title}!</h1>
-        <p className="text-lg text-gray-700 leading-relaxed">
-          Esta página está sendo renderizada dentro do AppShell. Note que as cores do Cabeçalho, 
-          Rodapé e Sidebar foram injetadas dinamicamente via props configuradas no banco de dados, 
-          seguindo exatamente as restrições definidas em `components_ui.ts`.
-        </p>
+    <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
+      <div className="max-w-md w-full bg-gray-800 p-8 rounded-lg shadow-xl">
+        <h1 className="text-3xl font-bold mb-2 text-center text-blue-400">CorePages</h1>
+        <p className="text-gray-400 text-center mb-6">Crie sua estrutura padrão em minutos.</p>
         
-        {/* Aqui entrariam futuramente os Cards e Textos que o usuário adicionar */}
-        <div className="mt-8 p-6 bg-gray-100 rounded-lg border border-dashed border-gray-400 text-center">
-          <p className="text-gray-500 italic">+ Adicionar novo Bloco de Conteúdo (Cards/Textos)</p>
-        </div>
+        <form onSubmit={handleLogin} className="flex flex-col gap-4">
+          <input 
+            type="text" 
+            placeholder="Nome" 
+            value={nome} // Mudamos de defaultValue para value
+            onChange={(e) => setNome(e.target.value)} // O hook captura a mudança
+            className="p-3 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:border-blue-500"
+          />
+          <input 
+            type="email" 
+            placeholder="E-mail" 
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="p-3 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:border-blue-500"
+          />
+          <input 
+            type="password" 
+            placeholder="Senha" 
+            value={senha}
+            onChange={(e) => setSenha(e.target.value)}
+            className="p-3 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:border-blue-500"
+          />
+          <button 
+            type="submit" 
+            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded mt-2 transition-colors"
+          >
+            Cadastrar e Entrar
+          </button>
+        </form>
       </div>
-    </AppShell>
+    </div>
   );
 }
