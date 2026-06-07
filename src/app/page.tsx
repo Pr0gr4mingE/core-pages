@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
@@ -42,9 +43,16 @@ export default function LandingPage() {
             value={senha}
             onChange={(e) => setSenha(e.target.value)}
           />
+          
           <Button type="submit" variant="primary" size="md" className="mt-2">
             Cadastrar e Entrar
           </Button>
+
+          <Link href="/dashboard" className="w-full">
+            <Button type="button" variant="outline" size="md" className="w-full mt-2 text-gray-300">
+              Acessar Painel (Visitante)
+            </Button>
+          </Link>
         </form>
       </div>
     </div>
