@@ -1,4 +1,4 @@
-import { CustomColorKey } from "./colors_components_ui";
+import { CustomColorKey } from "./ui_component_colors";
 
 export interface HeaderProps {
   setColor?: boolean;
